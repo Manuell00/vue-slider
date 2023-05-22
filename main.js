@@ -42,7 +42,7 @@ createApp({
             }
         },
 
-        indietro () {
+        indietro() {
             this.activeItem--;
             if (this.activeItem < 0) {
                 // Torno alla posizione ultima
@@ -50,8 +50,12 @@ createApp({
             }
         },
 
-        cambiaImmagine(indice) { 
+        cambiaImmagine(indice) {
             this.activeItem = indice;
+        },
+
+        autoplay() {
+            setInterval(avanti, 3000)
         }
 
     }
