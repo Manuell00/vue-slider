@@ -1,10 +1,10 @@
 // Inserisco Vue
-const {createApp} = Vue;
+const { createApp } = Vue;
 
 createApp({
-    data(){
+    data() {
         return {
-            images : [
+            images: [
                 {
                     image: 'img/01.webp',
                     title: 'Marvels Spiderman Miles Morales',
@@ -28,101 +28,31 @@ createApp({
                 }
             ],
 
-            immagine : images.forEach(element => {
-
-                // Destructuring
-                let { image, title, text } = element;
-            
-                // Creo le schede pcon l'immagine
-                let scheda = `<!--Inserisco la scheda -->
-                <div id="imgContainer">
-                    <!-- Inserisco l'immagine -->
-                    <img src="${image}" alt="${image}">
-                </div>`
-            
-                // Creo le schede con le relative frasi
-                let frasi = ` <!-- Inserisco la parte testuale -->
-                <div class="text">
-                    <h3 class="subtitle">${title}</h3>
-                    <p class="text">${text}</p>
-                </div>`
-            
-                // Inserisco le immagini nel thumbnails
-                let immagine = `<div class="thumbnailsImg opacityYes"> <img src="${image}" alt="${image}"></div>`
-                thumbnailsContainer.innerHTML += immagine
-            
-                // Creo dei mini array che inserisco a loro volta in un array più grande
-                let coppia = []
-                coppia.push(scheda, frasi)
-                schedaFrase.push(coppia)
-            }),
-
-            activeItem : 0,
-            schedaFrase : [],
-            coppie : schedaFrase[activeItem],
+            activeItem: 0,
 
         }
     },
 
     methods: {
-        avanti : function () {
-
-            // Definisco la variabile immagine
-            let coppie = schedaFrase[activeItem + 1]
-    
-            // Rimuovo la classe activeItem dall'elemento
-            miniatura[activeItem].classList.remove("active")
-            miniatura[activeItem].classList.add("opacityYes")
-    
-            // Se non sono all'ultimo elemento
-            if (activeItem == schedaFrase.length - 1) {
-                activeItem = 0
-                coppie = schedaFrase[activeItem]
+        avanti() {
+            this.activeItem++;
+            if (this.activeItem === this.images.length) {
+                // Torno alla posizione zero
+                this.activeItem = 0;
             }
-    
-            else {
-                activeItem++
-            }
-    
-            // Aggiungo la classe activeItem all'elemento
-            miniatura[activeItem].classList.add("active")
-            miniatura[activeItem].classList.remove("opacityYes")
-    
-            // Incollo l'immagine a imgContainer e la frase a phraseContainer
-            imgContainer.innerHTML = (coppie[0])
-            phraseContainer.innerHTML = (coppie[1])
         },
 
-
-        indietro : function () {
-
-            // Definisco la variabile coppie
-            let coppie = schedaFrase[activeItem - 1]
-    
-            // Rimuovo la classe activeItem dall'elemento
-            miniatura[activeItem].classList.remove("active")
-            miniatura[activeItem].classList.add("opacityYes")
-    
-            // Se non sono al primo elemento
-            if (activeItem == 0) {
-                activeItem = schedaFrase.length - 1
-                coppie = schedaFrase[activeItem]
+        indietro () {
+            this.activeItem--;
+            if (this.activeItem < 0) {
+                // Torno alla posizione ultima
+                this.activeItem = this.images.length - 1;
             }
-    
-            else {
-                activeItem--
-            }
-    
-            // Aggiungo la classe activeItem all'elemento
-            miniatura[activeItem].classList.add("active")
-            miniatura[activeItem].classList.remove("opacityYes")
-    
-            // Incollo l'immagine a imgContainer e la frase a phraseContainer
-            imgContainer.innerHTML = (coppie[0])
-            phraseContainer.innerHTML = (coppie[1])
+        },
+
+        cambiaImmagine(indice) { 
+            this.activeItem = indice;
         }
+
     }
-
-
-
 }).mount('#container')

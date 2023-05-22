@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title della pagina -->
-    <title>Caousel js</title>
+    <title>Caousel js Vue</title>
 
     <!-- Link foglio di stile -->
     <link rel="stylesheet" href="style.css">
@@ -27,17 +27,18 @@
     <div class="container-fluid text-center" id="container">
         <div class="row justify-content-center align-items-center" id="main-row">
 
-            <!-- Creo il container per l'immagine -->
+            <!-- Creo il container per l'immagine e la frase -->
             <div class="col-sm-6 col-md-6" id="imgButtonContainer">
 
+                <!-- Inserisco l'immagine -->
                 <div id="imgContainer">
-                    <!-- Inserisco l'immagine -->
-
+                    <img :src="images[activeItem].image" alt="">
                 </div>
 
-                <!-- Inserisco il container con le frasi -->
+                <!-- Inserisco le frasi -->
                 <div id="phraseContainer">
-
+                    <h2>{{images[activeItem].title}}</h2>
+                    <span>{{images[activeItem].text}}</span>
                 </div>
             </div>
 
@@ -47,24 +48,25 @@
             <!-- Creo il container per le thumbnails -->
             <div id="thumbnailsContainer" class="col-sm-3 col-md-3">
 
-                <!-- Inserisco il bottone in alto  -->
-                <button @click="avanti" type="button" class="btn btn-secondary" id="topButton"><i
-                        class="fa-solid fa-arrow-down"></i></button>
+                <!-- Creo un v-for che interroghi l'indice e nel caso sia verificata la cdizione aggiunga la classe active -->
+                <img v-for="(id,index) in images" :src="id.image" :class="activeItem === index ? 'active' : '' "
+                @click="cambiaImmagine(index)" class="thumbnailsImg opacityYes">
 
-                <!-- Inserisco il bottone in basso -->
-                <button @click="indietro" type="button" class="btn btn-secondary" id="bottomButton"><i
-                        class="fa-solid fa-arrow-up"></i></button>
+                    <!-- Inserisco il bottone in alto e gli inserisco il metodo "avanti"  -->
+                    <button @click="avanti" type="button" class="btn btn-secondary" id="topButton"><i
+                            class="fa-solid fa-arrow-down"></i></button>
 
+                    <!-- Inserisco il bottone in basso e gli inserisco il metodo "indietro"-->
+                    <button @click="indietro" type="button" class="btn btn-secondary" id="bottomButton"><i
+                            class="fa-solid fa-arrow-up"></i></button>
             </div>
-
         </div>
-    </div>
 
 
+        <!-- Inserisco la CDN di Vue -->
+        <script src="https://unpkg.com/vue@3"></script>
 
-    <!-- Inserisco il link al js -->
-    <script type="text/javascript" src="main.js"></script>
-    <img src="" alt="">
+        <!-- Inserisco il link al js -->
+        <script type="text/javascript" src="main.js"></script>
 </body>
-
 </html>
