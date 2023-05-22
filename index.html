@@ -28,7 +28,7 @@
         <div class="row justify-content-center align-items-center" id="main-row">
 
             <!-- Creo il container per l'immagine e la frase -->
-            <div class="col-sm-6 col-md-6" id="imgButtonContainer">
+            <div class="col-sm-8" id="imgButtonContainer">
 
                 <!-- Inserisco l'immagine -->
                 <div id="imgContainer">
@@ -49,7 +49,7 @@
             <div id="thumbnailsContainer" class="col-sm-3 col-md-3">
 
                 <!-- Creo un v-for che interroghi l'indice e nel caso sia verificata la cdizione aggiunga la classe active -->
-                <img v-for="(id,index) in images" :src="id.image" :class="activeItem === index ? 'active' : '' "
+                <img v-for="(id,index) in images" :src="id.image" :class="activeItem === index ? 'active opacityNo' : '' "
                 @click="cambiaImmagine(index)" class="thumbnailsImg opacityYes">
 
                     <!-- Inserisco il bottone in alto e gli inserisco il metodo "avanti"  -->
